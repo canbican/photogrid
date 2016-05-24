@@ -4,12 +4,29 @@ var args = arguments[0] || {},
 
 if (_.has(args, 'data')){
     _.each(args.data, function(photo){
+var photoContainer = Ti.UI.createView({
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+      });
+      var photoClose = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        top: 5,
+        right: 5,
+        text: '\uf00d',
+        font: {
+          fontFamily: 'FontAwesome',
+          fontSize: 24,
+        },
+      });
         var photoView = Ti.UI.createImageView({
             width: Ti.UI.FILL,
             height: Ti.UI.SIZE,
             image: photo.image
         });
-        data.push(photoView);
+        photoContainer.add(photoView);
+        photoContainer.add(photoClose);
+        data.push(photoContainer);
     });
     
     $.photos.setViews(data);
